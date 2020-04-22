@@ -1,6 +1,6 @@
 - name: Copy Virtual Disk file(s)
   command: cp -f {{ libvirt_manager_ref_qcow_disk_file }} {{ qcow_disk_file }}
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 - name: Define and create VM(s)
   virt:
@@ -8,11 +8,11 @@
     command: define
     xml: "{{ lookup('template', 'vm_template.xml.j2') }}"
     uri: "{{ uri }}"
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 #- pause:
 #    seconds: 5
-#  when: libvirt_manager_create == 'true'
+#  when: libvirt_manager_create == 'True'
 
 # Power on the Virtual Machine(s)
 - name: Start VM(s)
@@ -20,22 +20,22 @@
     name: "{{ name }}"
     state: running
     uri: "{{ uri }}"
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 #- pause:
 #    seconds: 5
-#  when: libvirt_manager_create == 'true'
+#  when: libvirt_manager_create == 'True'
 
 
 - name: Obtain IP MAC
   shell: virsh domiflist {{ name }} | grep --only-matching --extended-regexp "([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$"
   register: ip_mac
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 - name: Obtain IP Address
   shell: arp -n | grep  {{ip_mac.stdout}} | awk '{print $1}'
   register: ip_address
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 
 # Get current status of VMs
@@ -46,24 +46,24 @@
     uri: "{{ uri }}"
   ignore_errors: yes
   register: vm_status
-  when: libvirt_manager_create == 'true'
+  when: libvirt_manager_create == 'True'
 
 #- pause:
 #    seconds: 60
-#  when: libvirt_manager_create == 'true'
+#  when: libvirt_manager_create == 'True'
 
 
-### Undefine VM(s)
-- name: Undefine VM(s)
+### Destroy VM(s)
+- name: Destroy VM(s)
   virt:
     name: "{{ name }}"
-    command: undefine
+    command: destroy
     uri: "{{ uri }}"
   ignore_errors: yes
-  when: libvirt_manager_delete
+  when: libvirt_manager_delete == 'True'
 
 - name: Remove Virtual Disk file(s)
   file:
     path: "{{ qcow_disk_file }}"
     state: absent
-  when: libvirt_manager_delete == 'true'
+  when: libvirt_manager_delete == 'True'

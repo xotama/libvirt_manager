@@ -1,6 +1,5 @@
 - name: Libvirt Manager Playbook
   hosts: all
-#  connection: local
 #  become: yes
   pre_tasks:
 
