@@ -1,0 +1,16 @@
+- name: Libvirt Manager Playbook
+  hosts: all
+  tasks:
+
+  ### Destroy VM(s)
+  - name: Destroy VM(s)
+    virt:
+      name: "{{ name }}"
+      command: destroy
+      uri: "{{ uri }}"
+    ignore_errors: yes
+
+  - name: Remove Virtual Disk file(s)
+    file:
+      path: "{{ qcow_disk_file }}"
+      state: absent

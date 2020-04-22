@@ -1,6 +1,6 @@
 - name: Libvirt Manager Playbook
-  hosts: all
-#  become: yes
+  hosts: localhost
+  become: yes
   pre_tasks:
 
   roles:
