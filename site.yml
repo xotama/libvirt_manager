@@ -1,0 +1,12 @@
+- name: Libvirt Manager Playbook
+  hosts: localhost
+  connection: local
+  become: yes
+  pre_tasks:
+
+  roles:
+     - libvirt_manager
+
+  tasks:
+
+  post_tasks:

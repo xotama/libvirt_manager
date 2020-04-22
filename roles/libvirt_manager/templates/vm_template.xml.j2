@@ -1,0 +1,23 @@
+<domain type='kvm'>
+  <name>{{ name }}</name>
+  <memory unit='{{ memory_units }}'>{{ memory }}</memory>
+  <vcpu>{{ vcpu }}</vcpu>
+  <os>
+    <type>hvm</type>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+  </features>
+  <devices>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='{{ format }}'/>
+      <source file='{{ qcow_disk_file }}'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <interface type='network'>
+      <source network='default'/>
+      <model type='virtio'/>
+    </interface>
+  </devices>
+</domain>
