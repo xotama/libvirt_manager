@@ -9,3 +9,4 @@ qcow_disk_file : /var/lib/libvirt/images/test-vm01.qcow2
 
 libvirt_manager_ref_qcow_disk_file : /var/lib/libvirt/images/rhel-8.0-update-3-x86_64-kvm.qcow2
 uri : 'qemu:///system'
+group : Terna

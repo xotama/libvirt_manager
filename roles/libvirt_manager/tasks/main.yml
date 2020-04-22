@@ -33,3 +33,8 @@
     uri: "{{ uri }}"
   ignore_errors: yes
   register: vm_status
+
+- add_host:
+    name: "{{ name }}"
+    group: "{{ group }}"
+    ansible_host: "{{ ip_address }}"
