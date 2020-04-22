@@ -1,5 +1,6 @@
 - name: Libvirt Manager Playbook
   hosts: all
+  become: yes
   tasks:
 
   ### Destroy VM(s)
