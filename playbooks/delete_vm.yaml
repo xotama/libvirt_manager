@@ -11,6 +11,14 @@
       uri: "{{ uri }}"
     ignore_errors: yes
 
+  ### Destroy VM(s)
+  - name: Destroy VM(s)
+    virt:
+      name: "{{ name }}"
+      command: undefine
+      uri: "{{ uri }}"
+    ignore_errors: yes
+
   - name: Remove Virtual Disk file(s)
     file:
       path: "{{ qcow_disk_file }}"
