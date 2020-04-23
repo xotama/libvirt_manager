@@ -1,0 +1,9 @@
+---
+
+- name: Unregister 
+  command: redhat-access-insights --unregister
+  register: unreg_task
+
+- name: Absent subscribe
+  redhat_subscription:
+    state: absent

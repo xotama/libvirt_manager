@@ -4,5 +4,5 @@
         redhat_subscription:
           state: absent
 
-      - name: insights registration 
+      - name: insights unregistration 
         command: insights-client --unregister
